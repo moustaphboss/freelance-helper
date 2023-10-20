@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RightBlock from '../components/RightBlock';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 
 const Login = () => {
@@ -10,8 +10,10 @@ const Login = () => {
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log("form submitted");
+    // console.log("form submitted");
   }
+
+
 
   return (
     <main className="flex min-h-screen w-full bg-white flex-row p-8 font-poppins">
