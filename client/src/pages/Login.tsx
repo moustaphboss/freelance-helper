@@ -1,9 +1,18 @@
-import React from 'react'
-import RightBlock from '../components/RightBlock'
-import { Link } from 'react-router-dom'
-import Logo from '../components/Logo'
+import React from 'react';
+import { useState } from 'react';
+import RightBlock from '../components/RightBlock';
+import { Link } from 'react-router-dom';
+import Logo from '../components/Logo';
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async(e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("form submitted");
+  }
+
   return (
     <main className="flex min-h-screen w-full bg-white flex-row p-8 font-poppins">
       
@@ -15,13 +24,15 @@ const Login = () => {
         <h4 className="text-slate-600 text-xl mb-32">We missed you!</h4>
 
         <div className="flex h-full flex-column w-full max-w-lg">
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-8">
               <label className="text-slate-800 mb-2 text-lg flex justify-start" htmlFor="email">Email</label>
               <input
                 className="rounded-full py-4 px-8 bg-white w-full focus:outline-teal-600"
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
               />
             </div>
@@ -32,13 +43,15 @@ const Login = () => {
                 className="rounded-full py-4 px-8 bg-white w-full focus:outline-teal-600"
                 id="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Your password"
               />
             </div>
             <Link to="/dashboard" className="mb-20 flex justify-end underline">Forgot password?</Link>
 
             <div className="flex mb-10">
-              <button className="bg-teal-800 hover:bg-teal-900 text-white font-semibold w-full py-4 rounded-full">Sign in</button>
+              <button type='submit' className="bg-teal-800 hover:bg-teal-900 text-white font-semibold w-full py-4 rounded-full">Sign in</button>
             </div>
             <div className="flex flex-row items-center mb-10">
               <hr className="w-full border border-slate-300"/>

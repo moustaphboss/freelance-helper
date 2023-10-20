@@ -1,9 +1,19 @@
 import React from 'react'
+import { useState } from 'react'
 import Logo from '../components/Logo'
 import { Link } from 'react-router-dom'
 import RightBlock from '../components/RightBlock'
 
 const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async(e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("form submitted");
+  }
+
   return (
     <main className="flex min-h-screen w-full bg-white flex-row p-8 font-poppins">
       
@@ -15,13 +25,15 @@ const Signup = () => {
         <h4 className="text-slate-600 text-xl mb-32">And start organizing your projects now!</h4>
 
         <div className="flex h-full flex-column w-full max-w-lg">
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-8">
               <label className="text-slate-800 mb-2 text-lg flex justify-start" htmlFor="name">Full name</label>
               <input
                 className="rounded-full py-4 px-8 bg-white w-full focus:outline-teal-600"
                 id="name"
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your full name"
               />
             </div>
@@ -31,6 +43,8 @@ const Signup = () => {
                 className="rounded-full py-4 px-8 bg-white w-full focus:outline-teal-600"
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
               />
             </div>
@@ -41,6 +55,8 @@ const Signup = () => {
                 className="rounded-full py-4 px-8 bg-white w-full focus:outline-teal-600"
                 id="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Your password"
               />
             </div>
@@ -55,7 +71,7 @@ const Signup = () => {
               <hr className="w-full border border-slate-300"/>
             </div>
             <div className="flex mb-10">
-              <button className="bg-white hover:bg-teal-900 text-teal-950 font-semibold w-full py-4 rounded-full">Sign Up with Google</button>
+              <button type="submit" className="bg-white hover:bg-teal-900 text-teal-950 font-semibold w-full py-4 rounded-full">Sign Up with Google</button>
             </div>
             <p className="text-lg text-center">Already a member? <Link to="/" className="text-teal-700 font-bold">Login</Link></p>
           </form>
