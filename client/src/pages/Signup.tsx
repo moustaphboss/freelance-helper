@@ -11,7 +11,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const baseUrl = "http://localhost:8080/api/users"
+  const baseUrl = "http://13.51.55.100:8080/api/users"
 
   const handleSubmit = async(e: any) => {
     e.preventDefault();
