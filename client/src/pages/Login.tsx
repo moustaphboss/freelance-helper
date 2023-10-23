@@ -3,14 +3,35 @@ import { useState, useEffect } from 'react';
 import RightBlock from '../components/RightBlock';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const baseUrl = "http://localhost:8080/api/users"
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     // console.log("form submitted");
+    console.log("form submitted", {email, password});
+    
+    try {
+
+      axios.post(
+        `${baseUrl}/auth`,
+        {email, password},
+        {withCredentials: true}
+      ).then((res) => {
+        console.log(res.data);
+        navigate("/");
+      }).catch((err) => {
+        console.log("there was an error", err);
+      });
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 

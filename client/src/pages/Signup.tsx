@@ -1,17 +1,38 @@
 import React from 'react'
 import { useState } from 'react'
 import Logo from '../components/Logo'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
 import RightBlock from '../components/RightBlock'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const baseUrl = "http://localhost:8080/api/users"
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async(e: any) => {
     e.preventDefault();
-    console.log("form submitted");
+    console.log("form submitted", {name, email, password});
+    
+    try {
+
+      axios.post(
+        `${baseUrl}/signup`,
+        {name, email, password},
+        {withCredentials: true}
+      ).then((res) => {
+        console.log(res);
+        navigate("/");
+      }).catch((err) => {
+        console.log("there was an error", err);
+      });
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -73,7 +94,7 @@ const Signup = () => {
             <div className="flex mb-10">
               <button type="submit" className="bg-white hover:bg-teal-900 text-teal-950 font-semibold w-full py-4 rounded-full">Sign Up with Google</button>
             </div>
-            <p className="text-lg text-center">Already a member? <Link to="/" className="text-teal-700 font-bold">Login</Link></p>
+            <p className="text-lg text-center">Already a member? <Link to="/login" className="text-teal-700 font-bold">Login</Link></p>
           </form>
         </div>
       </div>
